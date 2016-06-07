@@ -1,0 +1,15 @@
+*.swp
+*.swo
+.DS_Store
+.idea/
+*.iml
+atlassian-ide-*
+target
+tmp
+.history
+.project
+.classpath
+.cache
+.settings
+.metadata
+reports
