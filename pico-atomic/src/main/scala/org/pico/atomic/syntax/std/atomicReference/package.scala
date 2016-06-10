@@ -2,6 +2,8 @@ package org.pico.atomic.syntax.std
 
 import java.util.concurrent.atomic.AtomicReference
 
+import org.pico.atomic.EmptyReferent
+
 import scala.annotation.tailrec
 
 package object atomicReference {
@@ -26,5 +28,9 @@ package object atomicReference {
 
       go(self.get())
     }
+
+    /** Release the referent by substituting the empty referent.
+      */
+    def release()(implicit ev: EmptyReferent[A]): A = self.getAndSet(ev.emptyReferent)
   }
 }

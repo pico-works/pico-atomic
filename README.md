@@ -12,7 +12,7 @@ Add this to your SBT project:
 ```
 resolvers += "dl-john-ky-releases" at "http://dl.john-ky.io/maven/releases"
 
-libraryDependencies += "org.pico" %%  "pico-atomic" % "0.0.1-2"
+libraryDependencies += "org.pico" %%  "pico-atomic" % "0.0.1-3"
 ```
 
 ## Atomic updates
@@ -32,3 +32,16 @@ A value can be updated atomically with a transformation function using the updat
 
 The update function will retry applying the transformation function until a successful
 atomic update occurs.
+
+## Releasing references
+Sometimes, there is a natural value that an atomic reference should be reset to.  To reset to
+that value, use the `release()` method:
+
+    val reference: AtomicReferenc[R] = ???
+    reference.release()
+
+This will only compile for reference types`R` that have an `EmptyReferent` type class instance.
+
+An `EmptyReferent` type class instance can easily be defined like this:
+
+    implicit val emptyReferent_MyType_WHzeiNw = EmptyReferent.define[MyType](EmptyMyType)
