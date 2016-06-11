@@ -26,5 +26,13 @@ package object atomicBoolean {
 
       go(self.get())
     }
+
+    /** Atomically swap a value for the existing value in an AtomicBoolean.  Same as getAndSet.
+      *
+      * @param newValue The new value to atomically swap into the AtomicBoolean
+      * @return The old value that was swapped out.
+      */
+    @inline
+    final def swap(newValue: Boolean): Boolean = self.getAndSet(newValue)
   }
 }

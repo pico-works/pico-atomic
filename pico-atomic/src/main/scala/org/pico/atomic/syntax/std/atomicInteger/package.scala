@@ -11,7 +11,8 @@ package object atomicInteger {
       * @param f The function to transform the current value
       * @return A pair of the old and new values
       */
-    def update(f: Int => Int): (Int, Int) = {
+    @inline
+    final def update(f: Int => Int): (Int, Int) = {
       @tailrec
       def go(oldValue: Int): (Int, Int) = {
         val newValue = f(oldValue)
@@ -26,5 +27,13 @@ package object atomicInteger {
 
       go(self.get())
     }
+
+    /** Atomically swap a value for the existing value in an AtomicInteger.  Same as getAndSet.
+      *
+      * @param newValue The new value to atomically swap into the AtomicInteger
+      * @return The old value that was swapped out.
+      */
+    @inline
+    final def swap(newValue: Int): Int = self.getAndSet(newValue)
   }
 }

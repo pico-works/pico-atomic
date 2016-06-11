@@ -10,13 +10,10 @@ class PackageSpec extends Specification {
       val ref = new AtomicReference[Int](1)
 
       ref.update(_ + 1) ==== (1, 2)
-
-      ref.get ==== 2
-
-      ok
+      ref.get must_=== 2
     }
 
-    "perform updates asynchronousely" in {
+    "perform updates asynchronously" in {
       val ref = new AtomicReference[Int](1)
 
       val runnable = new Runnable {
@@ -34,9 +31,13 @@ class PackageSpec extends Specification {
       thread2.join()
       thread1.join()
 
-      ref.get ==== 3
+      ref.get must_=== 3
+    }
 
-      ok
+    "be able to swap" in {
+      val ref = new AtomicReference[Int](1)
+
+      ref.swap(2) must_=== 1
     }
   }
 }

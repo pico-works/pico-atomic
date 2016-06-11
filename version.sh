@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-_sem_ver="0.1.0"
+_sem_ver="0.2.0"
 _commits="$(git rev-list --count HEAD)"
 _hash="$(git rev-parse --short HEAD)"
 

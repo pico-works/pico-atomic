@@ -11,7 +11,8 @@ package object atomicLong {
       * @param f The function to transform the current value
       * @return A pair of the old and new values
       */
-    def update(f: Long => Long): (Long, Long) = {
+    @inline
+    final def update(f: Long => Long): (Long, Long) = {
       @tailrec
       def go(oldValue: Long): (Long, Long) = {
         val newValue = f(oldValue)
@@ -26,5 +27,13 @@ package object atomicLong {
 
       go(self.get())
     }
+
+    /** Atomically swap a value for the existing value in an AtomicLong.  Same as getAndSet.
+      *
+      * @param newValue The new value to atomically swap into the AtomicLong
+      * @return The old value that was swapped out.
+      */
+    @inline
+    final def swap(newValue: Long): Long = self.getAndSet(newValue)
   }
 }

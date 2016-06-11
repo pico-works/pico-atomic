@@ -33,15 +33,5 @@ A value can be updated atomically with a transformation function using the updat
 The update function will retry applying the transformation function until a successful
 atomic update occurs.
 
-## Releasing references
-Sometimes, there is a natural value that an atomic reference should be reset to.  To reset to
-that value, use the `release()` method:
-
-    val reference: AtomicReferenc[R] = ???
-    reference.release()
-
-This will only compile for reference types`R` that have an `EmptyReferent` type class instance.
-
-An `EmptyReferent` type class instance can easily be defined like this:
-
-    implicit val emptyReferent_MyType_WHzeiNw = EmptyReferent.define[MyType](EmptyMyType)
+## Swap method
+The `swap` method is equivalent to `getAndSet`, just with a shorter name.

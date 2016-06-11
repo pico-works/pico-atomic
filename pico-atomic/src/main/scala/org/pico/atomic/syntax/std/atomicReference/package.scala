@@ -2,8 +2,6 @@ package org.pico.atomic.syntax.std
 
 import java.util.concurrent.atomic.AtomicReference
 
-import org.pico.atomic.EmptyReferent
-
 import scala.annotation.tailrec
 
 package object atomicReference {
@@ -13,7 +11,8 @@ package object atomicReference {
       * @param f The function to transform the current reference
       * @return A pair of the old and new values
       */
-    def update(f: A => A): (A, A) = {
+    @inline
+    final def update(f: A => A): (A, A) = {
       @tailrec
       def go(oldValue: A): (A, A) = {
         val newValue = f(oldValue)
@@ -29,8 +28,12 @@ package object atomicReference {
       go(self.get())
     }
 
-    /** Release the referent by substituting the empty referent.
+    /** Atomically swap a value for the existing value in an atomic reference.  Same as getAndSet.
+      *
+      * @param newValue The new value to atomically swap into the atomic reference
+      * @return The old value that was swapped out.
       */
-    def release()(implicit ev: EmptyReferent[A]): A = self.getAndSet(ev.emptyReferent)
+    @inline
+    final def swap(newValue: A): A = self.getAndSet(newValue)
   }
 }
