@@ -1,20 +1,20 @@
-package org.pico.atomic.syntax.std.atomicReference
+package org.pico.atomic.syntax.std.atomicInteger
 
-import java.util.concurrent.atomic.AtomicReference
+import java.util.concurrent.atomic.AtomicInteger
 
 import org.specs2.mutable.Specification
 
 class PackageSpec extends Specification {
-  "AtomicReference" should {
+  "AtomicInteger" should {
     "have syntax to update its reference given a transformation function" in {
-      val ref = new AtomicReference[Int](1)
+      val ref = new AtomicInteger(1)
 
       ref.update(_ + 1) ==== (1, 2)
       ref.get must_=== 2
     }
 
     "have syntax to update asynchronously" in {
-      val ref = new AtomicReference[Int](1)
+      val ref = new AtomicInteger(1)
 
       val runnable = new Runnable {
         override def run(): Unit = {
@@ -35,7 +35,7 @@ class PackageSpec extends Specification {
     }
 
     "have syntax to swap" in {
-      val ref = new AtomicReference[Int](1)
+      val ref = new AtomicInteger(1)
 
       ref.swap(2) must_=== 1
     }
