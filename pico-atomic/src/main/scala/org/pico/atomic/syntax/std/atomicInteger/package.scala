@@ -35,5 +35,12 @@ package object atomicInteger {
       */
     @inline
     final def swap(newValue: Int): Int = self.getAndSet(newValue)
+
+    /** Get the value
+      *
+      * @return The value
+      */
+    @inline
+    final def value: Int = self.get
   }
 }

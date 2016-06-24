@@ -35,5 +35,12 @@ package object atomicReference {
       */
     @inline
     final def swap(newValue: A): A = self.getAndSet(newValue)
+
+    /** Get the value
+      *
+      * @return The value
+      */
+    @inline
+    final def value: A = self.get
   }
 }

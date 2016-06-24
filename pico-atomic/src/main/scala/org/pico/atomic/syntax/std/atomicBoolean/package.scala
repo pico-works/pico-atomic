@@ -34,5 +34,12 @@ package object atomicBoolean {
       */
     @inline
     final def swap(newValue: Boolean): Boolean = self.getAndSet(newValue)
+
+    /** Get the value
+      *
+      * @return The value
+      */
+    @inline
+    final def value: Boolean = self.get
   }
 }

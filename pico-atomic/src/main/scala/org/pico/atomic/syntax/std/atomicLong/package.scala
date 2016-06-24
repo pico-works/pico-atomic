@@ -35,5 +35,12 @@ package object atomicLong {
       */
     @inline
     final def swap(newValue: Long): Long = self.getAndSet(newValue)
+
+    /** Get the value
+      *
+      * @return The value
+      */
+    @inline
+    final def value: Long = self.get
   }
 }

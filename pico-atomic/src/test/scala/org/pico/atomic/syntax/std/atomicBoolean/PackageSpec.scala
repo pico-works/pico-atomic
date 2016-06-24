@@ -39,5 +39,11 @@ class PackageSpec extends Specification {
 
       ref.swap(true) must_=== false
     }
+
+    "have syntax to get value" in {
+      val ref = new AtomicBoolean(false)
+
+      ref.value must_=== ref.get()
+    }
   }
 }
