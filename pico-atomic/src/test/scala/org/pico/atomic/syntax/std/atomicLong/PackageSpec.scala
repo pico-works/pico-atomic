@@ -1,6 +1,6 @@
 package org.pico.atomic.syntax.std.atomicLong
 
-import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.atomic.{AtomicBoolean, AtomicLong}
 
 import org.specs2.mutable.Specification
 
@@ -38,6 +38,12 @@ class PackageSpec extends Specification {
       val ref = new AtomicLong(1)
 
       ref.swap(2) must_=== 1
+    }
+
+    "have syntax to get value" in {
+      val ref = new AtomicLong(1)
+
+      ref.value must_=== ref.get()
     }
   }
 }

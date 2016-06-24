@@ -1,6 +1,6 @@
 package org.pico.atomic.syntax.std.atomicReference
 
-import java.util.concurrent.atomic.AtomicReference
+import java.util.concurrent.atomic.{AtomicBoolean, AtomicReference}
 
 import org.specs2.mutable.Specification
 
@@ -38,6 +38,13 @@ class PackageSpec extends Specification {
       val ref = new AtomicReference[Int](1)
 
       ref.swap(2) must_=== 1
+    }
+
+
+    "have syntax to get value" in {
+      val ref = new AtomicReference(1)
+
+      ref.value must_=== ref.get()
     }
   }
 }
