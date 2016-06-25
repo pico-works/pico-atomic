@@ -12,7 +12,7 @@ Add this to your SBT project:
 ```
 resolvers += "dl-john-ky-releases" at "http://dl.john-ky.io/maven/releases"
 
-libraryDependencies += "org.pico" %%  "pico-atomic" % "0.0.1-3"
+libraryDependencies += "org.pico" %%  "pico-atomic" % "0.2.0-9"
 ```
 
 ## Atomic updates
@@ -21,14 +21,14 @@ A value can be updated atomically with a transformation function using the updat
       import org.pico.atomic.syntax.std.atomicInteger._
       import java.util.concurrent.atomic.AtomicInteger
       val ref = new AtomicInteger(1)
-      ref.update(_ + 1) must_== (1, 2)
-      ref.get must_== 2
+      ref.update(_ + 1) must_=== (1, 2)
+      ref.value must_=== 2
 
       import org.pico.atomic.syntax.std.atomicReference._
       import java.util.concurrent.atomic.AtomicReference
       val ref = new AtomicReference[Int](1)
-      ref.update(_ + 1) must_== (1, 2)
-      ref.get must_== 2
+      ref.update(_ + 1) must_=== (1, 2)
+      ref.value must_=== 2
 
 The update function will retry applying the transformation function until a successful
 atomic update occurs.
