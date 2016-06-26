@@ -2,6 +2,7 @@
 [![CircleCI](https://circleci.com/gh/pico-works/pico-atomic/tree/develop.svg?style=svg)](https://circleci.com/gh/pico-works/pico-atomic/tree/develop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b3d7075c42e74cb2b5d36b88239655e6)](https://www.codacy.com/app/newhoggy/pico-works-pico-atomic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pico-works/pico-atomic&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/b3d7075c42e74cb2b5d36b88239655e6)](https://www.codacy.com/app/newhoggy/pico-works-pico-atomic?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pico-works/pico-atomic&amp;utm_campaign=Badge_Coverage)
+[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pico-works/general)
 
 Support library for atomic operations.
 
