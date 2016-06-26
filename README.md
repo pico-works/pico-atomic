@@ -12,7 +12,7 @@ Add this to your SBT project:
 ```
 resolvers += "dl-john-ky-releases" at "http://dl.john-ky.io/maven/releases"
 
-libraryDependencies += "org.pico" %%  "pico-atomic" % "0.2.0-9"
+libraryDependencies += "org.pico" %%  "pico-atomic" % "0.2.0"
 ```
 
 ## Atomic updates

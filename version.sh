@@ -70,6 +70,11 @@ else
             echo ""
             exit 1
         }
+        exit 0
+        ;;
+    new-version-branch)
+        git checkout -b "PR-new-version-$(git rev-parse --short @)"
+        exit 0
         ;;
     esac
 fi
