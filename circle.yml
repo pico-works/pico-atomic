@@ -31,7 +31,7 @@ test:
 deployment:
   release:
     owner: pico-works
-    branch: /v.*/
+    tag: /v.*/
     commands:
       - sbt +publish
 
