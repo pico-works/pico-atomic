@@ -13,18 +13,18 @@ package object atomicBoolean {
       */
     def update(f: Boolean => Boolean): (Boolean, Boolean) = {
       @tailrec
-      def go(oldValue: Boolean): (Boolean, Boolean) = {
-        val newValue = f(oldValue)
-        val currentValue = self.getAndSet(newValue)
+      def go(): (Boolean, Boolean) = {
+        val oldValue = self.get()
+        val newValue = f(self.get())
 
-        if (currentValue != oldValue) {
-          go(currentValue)
-        } else {
+        if (self.compareAndSet(oldValue, f(oldValue))) {
           (oldValue, newValue)
+        } else {
+          go()
         }
       }
 
-      go(self.get())
+      go()
     }
 
     /** Atomically swap a value for the existing value in an AtomicBoolean.  Same as getAndSet.

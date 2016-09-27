@@ -14,18 +14,18 @@ package object atomicInteger {
     @inline
     final def update(f: Int => Int): (Int, Int) = {
       @tailrec
-      def go(oldValue: Int): (Int, Int) = {
-        val newValue = f(oldValue)
-        val currentValue = self.getAndSet(newValue)
+      def go(): (Int, Int) = {
+        val oldValue = self.get()
+        val newValue = f(self.get())
 
-        if (currentValue != oldValue) {
-          go(currentValue)
-        } else {
+        if (self.compareAndSet(oldValue, f(oldValue))) {
           (oldValue, newValue)
+        } else {
+          go()
         }
       }
 
-      go(self.get())
+      go()
     }
 
     /** Atomically swap a value for the existing value in an AtomicInteger.  Same as getAndSet.
