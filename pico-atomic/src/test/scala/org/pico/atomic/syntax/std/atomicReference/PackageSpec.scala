@@ -13,6 +13,12 @@ class PackageSpec extends Specification {
       ref.get must_=== 2
     }
 
+    "have syntax to update conditionally" in {
+      val ref = new AtomicReference[Int](1)
+      ref.updateIf(_ > 5, _ + 1) should beNone
+      ref.updateIf(_ < 5, _ + 1) should beSome(1 -> 2)
+    }
+    
     "have syntax to update asynchronously" in {
       val ref = new AtomicReference[Int](1)
 
@@ -33,6 +39,7 @@ class PackageSpec extends Specification {
 
       ref.get must_=== 3
     }
+
 
     "have syntax to swap" in {
       val ref = new AtomicReference[Int](1)
