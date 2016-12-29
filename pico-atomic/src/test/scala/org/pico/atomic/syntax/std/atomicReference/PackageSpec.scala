@@ -47,7 +47,6 @@ class PackageSpec extends Specification {
       ref.swap(2) must_=== 1
     }
 
-
     "have syntax to get value" in {
       val ref = new AtomicReference(1)
 
