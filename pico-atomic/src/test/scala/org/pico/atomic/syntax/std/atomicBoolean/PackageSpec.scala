@@ -12,6 +12,12 @@ class PackageSpec extends Specification {
       ref.update(!_) ==== false -> true
       ref.get must_=== true
     }
+  
+    "have syntax to update conditionally" in {
+      val ref = new AtomicBoolean(false)
+      ref.updateIf(_ == true, !_) should beNone
+      ref.updateIf(!_, !_) should beSome(false -> true)
+    }
 
     "have syntax to update asynchronously" in {
       val ref = new AtomicBoolean(false)

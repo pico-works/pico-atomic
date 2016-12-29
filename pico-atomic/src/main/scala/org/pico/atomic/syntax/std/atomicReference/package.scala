@@ -6,6 +6,30 @@ import scala.annotation.tailrec
 
 package object atomicReference {
   implicit class AtomicReferenceOps_YYKh2cf[A](val self: AtomicReference[A]) extends AnyVal {
+  
+    /** Repeatedly attempt to update the reference using the update function f
+      * until the condition is satisfied and is able to set it atomically.
+      * @param f The function to transform the current reference
+      * @param cond The value predicate
+      * @return An old value and a new value if an update happened
+      */
+    @inline
+    final def updateIf(cond: A => Boolean, f: A => A): Option[(A, A)] = {
+      @tailrec
+      def go(): Option[(A, A)] = {
+        val oldValue = self.get()
+        val isOk = cond(oldValue)
+      
+        if (!isOk) None
+        else {
+          val newValue = f(oldValue)
+          if (self.compareAndSet(oldValue, newValue)) Some(oldValue -> newValue)
+          else go()
+        }
+      }
+      go()
+    }
+    
     /** Repeatedly attempt to update the reference using the update function f until able to
       * set it atomically.
       * @param f The function to transform the current reference
@@ -13,21 +37,9 @@ package object atomicReference {
       */
     @inline
     final def update(f: A => A): (A, A) = {
-      @tailrec
-      def go(): (A, A) = {
-        val oldValue = self.get()
-        val newValue = f(self.get())
-
-        if (self.compareAndSet(oldValue, f(oldValue))) {
-          (oldValue, newValue)
-        } else {
-          go()
-        }
-      }
-
-      go()
+      updateIf(_ => true, f).get //Safe to call .get by construction, the predicate is hardcoded to be true
     }
-
+    
     /** Atomically swap a value for the existing value in an atomic reference.  Same as getAndSet.
       *
       * @param newValue The new value to atomically swap into the atomic reference
